@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0f1a" />
+  <title>Zori — Telegram</title>
+  <meta name="description" content="Инструменты, шаблоны и гайды, свежие сливы и не только. Перейти в Telegram." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ZoriArchive— Telegram" />
+  <meta property="og:description" content="Инструменты, шаблоны, гайды и сливы. Только с ZoriArchive" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#070a12;
+      --panel:#0b1020cc;
+      --stroke:#1b2444;
+      --text:#e8ecff;
+      --muted:#a8b1d6;
+      --accent:#7c5cff; /* можно сменить на свой */
+      --accent2:#28e0ae;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(124,92,255,.22), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(40,224,174,.14), transparent 60%),
+        radial-gradient(700px 420px at 50% 95%, rgba(124,92,255,.10), transparent 70%),
+        linear-gradient(180deg, #050714 0%, #070a12 45%, #060815 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 46px; }
+
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom:18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(40,224,174,.9));
+      box-shadow: 0 14px 30px rgba(124,92,255,.18);
+      position:relative;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:7px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.25);
+      opacity:.45;
+    }
+    .brand b{ font-size:14px; }
+    .pill{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(12,16,32,.55);
+      color:var(--muted);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero{
+      margin-top:14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(11,16,32,.70), rgba(11,16,32,.40));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(320px 220px at 22% 18%, rgba(124,92,255,.25), transparent 70%),
+        radial-gradient(340px 220px at 82% 25%, rgba(40,224,174,.16), transparent 70%);
+      filter: blur(8px);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      padding: 22px;
+    }
+
+    @media (max-width: 880px){
+      .hero-inner{ grid-template-columns: 1fr; }
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .cta-row{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      margin-bottom: 8px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+      font-weight: 700;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      min-height: 44px; /* mobile */
+    }
+    .btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.16); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(40,224,174,.75));
+      border-color: rgba(255,255,255,.10);
+      color: #061018;
+      box-shadow: 0 18px 40px rgba(124,92,255,.18);
+    }
+    .btn.primary:hover{ filter: brightness(1.02); }
+    .btn .ico{
+      width:18px;height:18px; display:inline-block;
+    }
+
+    .mini{
+      font-size: 12px;
+      color: var(--muted);
+      opacity:.95;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 880px){
+      .cards{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(12,16,32,.55);
+      padding: 14px;
+      backdrop-filter: blur(10px);
+    }
+    .card b{
+      display:block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+    .card p{
+      margin:0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .right{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(6,10,18,.55);
+      padding: 14px;
+      backdrop-filter: blur(10px);
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+
+    .shot{
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      overflow: hidden;
+      max-height: 200px;
+    }
+
+    .shot img{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .section{
+      margin-top: 16px;
+      padding: 18px 8px 0;
+    }
+    .section h2{
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: .2px;
+    }
+    .section .muted{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      margin:0;
+    }
+
+    .footer{
+      margin-top: 26px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      color: rgba(168,177,214,.8);
+      font-size: 12px;
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background: rgba(10,14,26,.85);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <b>ZoriArchive</b>
+          <div class="mini">Инструменты • Шаблоны • Гайды</div>
+        </div>
+      </div>
+      <div class="pill" id="pill">link: ready</div>
+    </div>
+
+    <main class="hero" role="main">
+      <div class="hero-inner">
+        <section>
+          <h1>ZoriArchive🏛️<br>Самое нужное в одном месте!</h1>
+          <p class="sub">
+            Я собираю инструменты, шаблоны и гайды, которые реально экономят время.
+            Часть материалов не публикуется публично — только в Telegram.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" id="tgBtn" href="#" rel="noopener">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 5.2 3.8 11.8c-1.2.46-1.19 1.12-.22 1.42l4.4 1.37 1.7 5.1c.2.56.1.78.73.78.48 0 .7-.22.98-.48l2.1-2.04 4.36 3.22c.8.44 1.38.22 1.58-.74l2.86-13.46c.3-1.18-.45-1.72-1.29-1.37Z" fill="currentColor" opacity=".95"/>
+              </svg>
+              Перейти в Telegram
+            </a>
+
+            <button class="btn" id="copyBtn" type="button" title="Скопировать ссылку">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" opacity=".55"/>
+              </svg>
+              Скопировать ссылку
+            </button>
+          </div>
+
+          <div class="mini" id="miniLine">
+            Откроется канал/бот. Если не открылось — скопируй ссылку и вставь в браузер.
+          </div>
+
+          <div class="cards" aria-label="Что внутри">
+            <div class="card">
+              <b>Инструменты</b>
+              <p>Сервисы и тулзы, которые реально ускоряют работу.</p>
+            </div>
+            <div class="card">
+              <b>Шаблоны</b>
+              <p>Готовые заготовки, чек-листы, сборки — бери и используй.</p>
+            </div>
+            <div class="card">
+              <b>Коротко</b>
+              <p>Никаких простыней. 60 секунд на пост — и ты уже применяешь.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="right" aria-label="Превью">
+          <div class="mini">Превью постов Archive</div>
+          <div class="shot">
+            <img src="images/screen-1.png" alt="Пример поста из ZoriArchive">
+          </div>
+          <div class="shot">
+            <img src="images/screen-2.png" alt="Пример гайда из ZoriArchive">
+          </div>
+          <div class="mini" style="opacity:.8">
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <section class="section" aria-label="Почему это работает">
+      <h2>Как это работает?</h2>
+      <p class="muted">
+        Наш канал может порадовать тебя сочной информацией, свежими сливами и нужными инструментам с каждого уголка интернета!
+      </p>
+    </section>
+
+    <div class="footer" role="contentinfo">
+      <div>© <span id="year"></span> Zori</div>
+      <div class="mini">No cookies • No forms • One button • Fast</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Скопировано.</div>
+
+  <script>
+    /**
+     * TODO: вставь свой Telegram URL
+     * Примеры:
+     *  - https://t.me/YourChannel
+     *  - https://t.me/YourBot
+     */
+    const TG_URL_BASE = "https://t.me/Zor1Archive";
+
+    // UTM passthrough: переносим utm_* параметры из URL лендинга в ссылку Telegram
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    // соберём только utm_* и ref, если нужно
+    const allowed = [];
+    for (const [k, v] of params.entries()) {
+      if (k.startsWith("utm_") || k === "ref") allowed.push([k, v]);
+    }
+
+    const tgUrl = new URL(TG_URL_BASE);
+    // добавим параметры к TG ссылке (через querystring — ок для https://t.me/...)
+    for (const [k, v] of allowed) tgUrl.searchParams.set(k, v);
+
+    const tgBtn = document.getElementById("tgBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const toast = document.getElementById("toast");
+    const pill = document.getElementById("pill");
+    const year = document.getElementById("year");
+
+    year.textContent = new Date().getFullYear();
+
+    tgBtn.href = tgUrl.toString();
+    pill.textContent = allowed.length ? `utm: ${allowed.map(x=>x[0]).join(", ")}` : "utm: none";
+
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"), 1200);
+    }
+
+    copyBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(tgUrl.toString());
+        showToast("Ссылка скопирована.");
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = tgUrl.toString();
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Скопировано (fallback).");
+      }
+    });
+
+    // optional: лог клика (для отладки)
+    tgBtn.addEventListener("click", () => {
+      // сюда можно добавить отправку события в аналитику
+      // console.log("TG click:", tgUrl.toString());
+    });
+  </script>
+</body>
+</html>
